@@ -9,7 +9,7 @@ class WSPixConsulta:
         self.__url = url
 
     def get_headers(self):
-        return self.__headers
+        return self.__headers.generate()
     
     def get_consulta_url(self, idfpix: str):
         url = path.join(self.__url, idfpix)

@@ -2,7 +2,7 @@ import requests
 from typing import Literal
 from validate_docbr import CPF, CNPJ
 from pydantic import BaseModel, EmailStr, field_validator
-
+from pywspix.headers import Headers
 
 class GerarPix(BaseModel):
     tipoPessoa: Literal["PF", "PJ"]
@@ -27,10 +27,9 @@ class GerarPix(BaseModel):
 
 
 class WSPixGera:
-    def __init__(self, user: str, password: str, url: str):
+    def __init__(self, headers: Headers, url: str):
         self.__payload = {}
-        self.user = user
-        self.password = password
+        self.__headers = headers
         self.url = url
 
     def validate_payload(self, **kwargs):
@@ -45,10 +44,7 @@ class WSPixGera:
         return self.__payload
     
     def get_headers(self):
-        return {
-            "X-Username": self.user,
-            "X-Password": self.password
-        }
+        return self.__headers.generate()
     
     def gerar_pix(self):
         payload = self.get_payload()

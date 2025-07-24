@@ -41,7 +41,7 @@ class Lista:
         return search_params.model_dump()
 
     def get_headers(self):
-        return self.__headers
+        return self.__headers.generate()
 
     def get_search_params(self):
         return self.__search_params
