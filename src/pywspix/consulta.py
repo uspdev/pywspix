@@ -22,11 +22,11 @@ class WSPixConsulta:
         headers = self.get_headers()
         url = self.get_consulta_url(idfpix)
         resp = requests.get(url=url, headers=headers)
-        return resp
+        return resp.json()
     
     def verificar(self, idfpix: str):
         url = self.get_consulta_url(idfpix)
         headers = self.get_headers()
         parameters = self.get_verifica_parameters()
         resp = requests.get(url=url, headers=headers, params=parameters)
-        return resp        
+        return resp.json()        

@@ -61,6 +61,6 @@ class Lista:
         headers = self.get_headers()
         url = self.get_url()
         resp = requests.get(url=url, headers=headers, params=params)
-        return resp
+        return resp.json()
 
 

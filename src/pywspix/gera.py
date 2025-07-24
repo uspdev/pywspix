@@ -50,4 +50,4 @@ class WSPixGera:
         payload = self.get_payload()
         headers = self.get_headers()
         resp = requests.post(url=self.url, json=payload, headers=headers)
-        return resp.content
+        return resp.json()
