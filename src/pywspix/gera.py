@@ -26,7 +26,7 @@ class GerarPix(BaseModel):
         return value
 
 
-class WSPixGerar:
+class WSPixGera:
     def __init__(self, user: str, password: str, url: str):
         self.__payload = {}
         self.user = user
