@@ -43,8 +43,14 @@ class Lista:
     def get_headers(self):
         return self.__headers.generate()
 
+    def format_date(self, date: datetime):
+        return date.strftime("%d/%m/%Y %H:%M:%S")
+
     def get_search_params(self):
-        return self.__search_params
+        search_params = self.__search_params
+        search_params["dtaini"] = self.format_date(search_params["dtaini"])
+        search_params["dtafim"] = self.format_date(search_params["dtafim"])
+        return search_params
     
     def set_search_params(self, **params):
         validated_params = self.validate_params(**params)

@@ -25,7 +25,10 @@ def create_lista():
 
 def test_set_search_params():
     lista = create_lista()
-    assert lista.get_search_params() == params
+    params_copy = params.copy()
+    params_copy["dtaini"] = params_copy["dtaini"].strftime("%d/%m/%Y %H:%M:%S")
+    params_copy["dtafim"] = params_copy["dtafim"].strftime("%d/%m/%Y %H:%M:%S")
+    assert lista.get_search_params() == params_copy
 
 
 def test_date_validation():
@@ -41,3 +44,9 @@ def test_get_url():
     url = lista.get_url()
     print(url)
     assert url == "https://test.pix.api/pix/listarConcluidos"
+
+
+def test_format_date():
+    lista = create_lista()
+    formated_date = lista.format_date(params["dtaini"])
+    assert formated_date == datetime.strftime(params["dtaini"], "%d/%m/%Y %H:%M:%S")
