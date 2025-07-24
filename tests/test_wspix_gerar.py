@@ -17,15 +17,18 @@ payload = {
     "estruturaHierarquica": r"\DISTRIBUIDOR"
 }
 
+url = "https://test-api.iag.usp.br"
+
+
 def assert_payload_validation(payload, key, value):
     with pytest.raises(ValidationError):
-        wspixgerar = WSPixGerar(user="user", password="pass")
+        wspixgerar = WSPixGerar(user="user", password="pass", url=url)
         data = payload.copy()
         data[key] = value
         wspixgerar.set_payload(**data)
 
 def test_set_payload():
-    wspixgerar = WSPixGerar(user="user", password="pass")
+    wspixgerar = WSPixGerar(user="user", password="pass", url=url)
     wspixgerar.set_payload(**payload)
     assert wspixgerar.get_payload() == payload
 
@@ -70,6 +73,6 @@ def test_validate_estruturahierarquica():
     assert_payload_validation(payload, "estruturaHierarquica", 12345)
 
 def test_get_headers():
-    wspixgerar = WSPixGerar(user="user", password="pass")
+    wspixgerar = WSPixGerar(user="user", password="pass", url=url)
     headers = wspixgerar.get_headers()
     assert headers == {"X-Username": "user", "X-Password": "pass"}
