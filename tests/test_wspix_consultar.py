@@ -13,8 +13,8 @@ def test_get_consulta_url():
     assert consulta.get_consulta_url("idfpix") == "https://api.test/idfpix"
 
 
-def test_get_verificar_parameteres():
+def test_get_verificar_parameters():
     consulta = get_consultar_obj()
-    assert consulta.get_verificar_parameters("idfpix") == {"verificar": "true"}
+    assert consulta.get_verificar_parameters() == {"verificar": "true"}
 
 

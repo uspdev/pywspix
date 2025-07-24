@@ -15,18 +15,18 @@ class WSPixConsultar:
         url = path.join(self.__url, idfpix)
         return url
     
-    def get_verificar_parameters(self, idfpix):
-        return {"verifica": idfpix}
+    def get_verificar_parameters(self):
+        return {"verificar": "true"}
     
     def consultar(self, idfpix: str):
         headers = self.get_headers()
-        url = self.get_consulta_url()
+        url = self.get_consulta_url(idfpix)
         resp = requests.get(url=url, headers=headers)
         return resp
     
     def verificar(self, idfpix: str):
-        url = self.get_consulta_url()
+        url = self.get_consulta_url(idfpix)
         headers = self.get_headers()
-        parameters = self.get_verifica_parameters(idfpix)
+        parameters = self.get_verifica_parameters()
         resp = requests.get(url=url, headers=headers, params=parameters)
         return resp        
