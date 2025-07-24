@@ -1,10 +1,10 @@
 from pywspix.headers import Headers
-from pywspix.consultar import WSPixConsultar
+from pywspix.consulta import WSPixConsulta
 
 
 def get_consultar_obj():
     headers = Headers(user="user", password="password")
-    consulta = WSPixConsultar(headers=headers, url="https://api.test")
+    consulta = WSPixConsulta(headers=headers, url="https://api.test")
     return consulta
 
 

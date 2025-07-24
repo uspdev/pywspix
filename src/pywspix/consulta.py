@@ -3,7 +3,7 @@ from os import path
 from pywspix.headers import Headers
 
 
-class WSPixConsultar:
+class WSPixConsulta:
     def __init__(self, headers: Headers, url: str):
         self.__headers = Headers
         self.__url = url
