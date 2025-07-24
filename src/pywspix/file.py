@@ -1,3 +1,4 @@
+import requests
 from pywspix.headers import Headers
 from urllib.parse import urljoin
 
@@ -29,3 +30,17 @@ class File:
     
     def get_qrcode_url(self):
         return self.generate_file_url(media_type="qrcode")
+
+    def get_media(self, url: str):
+        headers = self.get_headers()
+        resp = requests.get(url=url, headers=headers)
+        return resp.content
+
+    def get_pdf(self):
+        pdf_api_url = self.get_pdf_url()
+        return self.get_media(pdf_api_url)
+
+    def get_qrcode(self):
+        qrcode_api_url = self.get_qrcode_url()
+        return self.get_media(qrcode_api_url)
+    
