@@ -1,11 +1,11 @@
-from pywspix.file import File
+from pywspix.file import WSPixFile
 from pywspix.headers import Headers
 
 
 def create_file():
     headers = Headers(user="user1", password="pass")
     baseurl = "https://test.pix.api"
-    file = File(baseurl=baseurl, headers=headers, idfpix="kjashd")
+    file = WSPixFile(baseurl=baseurl, headers=headers, idfpix="kjashd")
     return file
 
 

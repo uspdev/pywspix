@@ -3,7 +3,7 @@ from pywspix.headers import Headers
 from urllib.parse import urljoin
 
 
-class File:
+class WSPixFile:
     def __init__(self, baseurl: str, headers: Headers, idfpix: str):
         self.__baseurl = baseurl
         self.__headers = headers
