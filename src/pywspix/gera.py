@@ -1,29 +1,6 @@
 import requests
-from typing import Literal
-from validate_docbr import CPF, CNPJ
-from pydantic import BaseModel, EmailStr, field_validator
 from pywspix.headers import Headers
-
-class GerarPix(BaseModel):
-    tipoPessoa: Literal["PF", "PJ"]
-    codPesOrg: int
-    docPesOrg: int
-    nomePesOrg: str
-    valor: float
-    infoCobranca: str
-    emailPesOrg: EmailStr
-    expiracao: int
-    codigoFonteRecurso: int
-    codigoUnidadeDespesa: int
-    estruturaHierarquica: str
-
-    @field_validator("docPesOrg")
-    def doc_pes_org_validator(cls, value):
-        cpf = CPF()
-        cnpj = CNPJ()
-        if not cpf.validate(str(value)) and not cnpj.validate(str(value)):
-            raise ValueError("CPF ou CNPJ inválido.")
-        return value
+from pywspix.schemas import GerarPix
 
 
 class WSPixGera:

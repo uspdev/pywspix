@@ -1,21 +1,8 @@
 import requests
 from urllib.parse import urljoin
-from pydantic import BaseModel, model_validator
 from datetime import datetime
 from pywspix.headers import Headers
-
-
-class SearchParams(BaseModel):
-    dtaini: datetime
-    dtafim: datetime
-    docPesOrg: int = None
-    nomsissvc: str = None
-
-    @model_validator(mode='after')
-    def validate_date(self):
-        if self.dtafim <= self.dtaini:
-            raise ValueError("dtaini deve ser menor do que dtafim")
-        return self
+from pywspix.schemas import SearchParams
 
 
 class Lista:

@@ -1,12 +1,7 @@
 import requests
 from urllib.parse import urljoin
-from pydantic import BaseModel, HttpUrl
 from pywspix.headers import Headers
-
-
-class WebhookConfig(BaseModel):
-    url: HttpUrl
-    token: str
+from pywspix.schemas import WebhookConfig
 
 
 class Webhook():
