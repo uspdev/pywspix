@@ -12,7 +12,7 @@ class WSPixConsulta:
         url (str): Url da api do serviço 
     """
     def __init__(self, headers: Headers, url: str):
-        self.__headers = Headers
+        self.__headers = headers
         self.__url = url
         self.__uri = "/wspix/api/pix/"
 
