@@ -1,9 +1,6 @@
 import requests
 from pywspix.headers import Headers
 from urllib.parse import urljoin
-
-
-from urllib.parse import urljoin
 import requests
 
 class WSPixFile:
