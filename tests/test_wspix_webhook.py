@@ -1,6 +1,6 @@
 import pytest
 from pydantic import ValidationError
-from pywspix.webhook import Webhook
+from pywspix.webhook import WSPixWebhook
 from pywspix.headers import Headers
 
 
@@ -15,7 +15,7 @@ WEBHOOK_CONFIG = {
 
 def create_webhook():
     headers = Headers(user="user1", password="pass")
-    webhook = Webhook(baseurl=URL, headers=headers)
+    webhook = WSPixWebhook(baseurl=URL, headers=headers)
     return webhook
 
 

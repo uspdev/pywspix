@@ -4,7 +4,7 @@ from pywspix.headers import Headers
 from pywspix.schemas import WebhookConfig
 
 
-class Webhook:
+class WSPixWebhook:
     """
     Cliente para configurar e remover webhooks Pix via API institucional.
 
