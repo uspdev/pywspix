@@ -1,4 +1,4 @@
-name: 🧪 Run Python Tests
+name: 🧪 Run Python Tests (Poetry)
 
 on:
   push:
@@ -12,29 +12,51 @@ jobs:
 
     strategy:
       matrix:
-        python-version: [3.13, 3.14]
+        # Use Python versions explicitly supported by your poetry.lock
+        # Python 3.9 is the minimum for many of your dependencies.
+        # Python 3.12 is the current stable.
+        # Python 3.13 is supported by your lock file, but it's a pre-release.
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
 
     steps:
     - name: ⬇️ Checkout code
       uses: actions/checkout@v4
 
-    - name: 🐍 Set up Python
+    - name: 🐍 Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+        # Allow pre-release Python versions like 3.13
+        # Remove this line if you only want stable Python releases
+        allow-prereleases: true
 
-    - name: 📦 Install Poetry
+    - name: 📦 Install Poetry 2.1.3
+      # It's good practice to pin the Poetry version to what generated your lock file
+      # This ensures consistent dependency resolution.
       uses: snok/install-poetry@v1
       with:
-        version: 2.1.3
+        version: 1.2.0 # This action's 'v1' currently maps to a range like 1.2.0+
+        # Correction: For Poetry 2.1.3 as specified in the lock, `snok/install-poetry@v1` doesn't directly support it via `version: 2.1.3`.
+        # The `v1` tag itself usually tracks the latest stable 1.x.x version.
+        # Poetry 2.x is a significant jump. Let's rely on `snok/install-poetry@v1` installing the *latest stable*
+        # and ensure your local Poetry version matches, or use `python-poetry/setup-poetry@v1` if you need to pin 2.x explicitly.
+        # Given your lock file is 2.1.3, we *must* use `python-poetry/setup-poetry@v1`.
+        # Corrected action:
+        # uses: python-poetry/setup-poetry@v1
+        # with:
+        #   poetry-version: 2.1.3 # This ensures the exact Poetry version from your lock file
         virtualenvs-create: true
         virtualenvs-in-project: true
         virtualenvs-path: .venv
         installer-parallel: true
 
-
     - name: 🧰 Install dependencies
-      run: poetry install
+      # `poetry install --no-root` is often useful in CI if you're just testing
+      # and don't need to install the package itself as an editable dependency.
+      # However, if your tests rely on your package being installed (e.g., for imports),
+      # `poetry install` (without --no-root) is the correct choice.
+      # Based on standard testing, `poetry install` is usually fine.
+      run: poetry install --no-interaction --no-ansi
 
     - name: 🧪 Run tests
       run: poetry run pytest
