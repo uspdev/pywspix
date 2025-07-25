@@ -37,7 +37,7 @@ class WSPixGera:
         return self.__payload
 
     def gerar_pix(self):
-        payload = self.__get_payload()
+        payload = self.get_payload()
         headers = self.__get_headers()
         url = self.__get_url()
         resp = requests.post(url=url, json=payload, headers=headers)
