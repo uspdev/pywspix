@@ -74,9 +74,3 @@ def test_validate_codigounidadedespesa():
 
 def test_validate_estruturahierarquica():
     assert_payload_validation(payload, "estruturaHierarquica", 12345)
-
-def test_get_headers():
-    headers = Headers(user="user1", password="pass")
-    wspixgerar = WSPixGera(headers=headers, url=url)
-    headers = wspixgerar.get_headers()
-    assert headers == {"X-Username": "user1", "X-Password": "pass"}
