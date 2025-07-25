@@ -32,9 +32,12 @@ class WSPixFile:
         return self.generate_file_url(media_type="qrcode")
 
     def get_media(self, url: str):
-        headers = self.get_headers()
-        resp = requests.get(url=url, headers=headers)
-        return resp.content
+        try:
+            headers = self.get_headers()
+            resp = requests.get(url=url, headers=headers)
+            return resp.content
+        except Exception as error:
+            return error
 
     def get_pdf(self):
         pdf_api_url = self.get_pdf_url()

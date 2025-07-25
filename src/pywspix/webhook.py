@@ -8,7 +8,7 @@ class Webhook():
     def __init__(self, baseurl: str, headers: Headers):
         self.__baseurl = baseurl
         self.__headers = headers 
-        self.__webhook_url = "/pix/webhookConfig"
+        self.__webhook_url = "/wspix/pix/webhookConfig"
         self.__config = None
 
     def get_baseurl(self):
@@ -41,14 +41,20 @@ class Webhook():
         return self.__config
     
     def config(self):
-        url = self.get_url()
-        config = self.get_config()
-        headers = self.get_headers()
-        resp = requests.post(url=url, json=config, headers=headers)
-        return resp.json()
+        try:
+            url = self.get_url()
+            config = self.get_config()
+            headers = self.get_headers()
+            resp = requests.post(url=url, json=config, headers=headers)
+            return resp.json()
+        except Exception as error:
+            return error
 
     def delete(self):
-        url = self.get_url()
-        headers = self.get_headers()
-        resp = requests.delete(url=url, headers=headers)
-        return resp.json()
+        try:
+            url = self.get_url()
+            headers = self.get_headers()
+            resp = requests.delete(url=url, headers=headers)
+            return resp.json()
+        except Exception as error:
+            return error

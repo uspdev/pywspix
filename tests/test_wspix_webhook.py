@@ -22,7 +22,7 @@ def create_webhook():
 def test_get_url():
     webhook = create_webhook()
     url = webhook.get_url()
-    assert url == f"{URL}/pix/webhookConfig"
+    assert url == f"{URL}/wspix/pix/webhookConfig"
 
 
 def test_set_config():

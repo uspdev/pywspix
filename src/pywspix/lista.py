@@ -9,7 +9,7 @@ class Lista:
     def __init__(self, baseurl: str, headers: Headers):
         self.__search_params = None
         self.__baseurl = baseurl
-        self.__listar_url = "/pix/listarConcluidos"
+        self.__listar_url = "/wspix/pix/listarConcluidos"
         self.__headers = headers
 
     def get_listar_url(self):
@@ -43,11 +43,18 @@ class Lista:
         validated_params = self.validate_params(**params)
         self.__search_params = validated_params
 
-    def listar(self):
+    def request_listar(self):
         params = self.get_search_params()
         headers = self.get_headers()
         url = self.get_url()
         resp = requests.get(url=url, headers=headers, params=params)
         return resp.json()
+
+    def listar(self):
+        try:
+            resp = self.request_listar()
+            return resp
+        except Exception as error:
+            return error
 
 

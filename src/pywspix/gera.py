@@ -1,4 +1,5 @@
 import requests
+from urllib.parse import urljoin
 from pywspix.headers import Headers
 from pywspix.schemas import GerarPix
 
@@ -9,6 +10,7 @@ class WSPixGera:
         self.__headers = headers
         self.__url = url
         self.__idfpix = None
+        self.__gerar_uri = "/wspix/api/pix/gerar"
 
     def __validate_payload(self, **kwargs):
         validated = GerarPix(**kwargs)
@@ -18,9 +20,11 @@ class WSPixGera:
         return self.__headers.generate()
 
     def __get_url(self):
-        return self.__url
+        url = urljoin(self.__url, self.__gerar_uri)
+        return url
 
-    def __set_idfpix(self, idfpix: str):
+    def __set_idfpix(self, pix_data: dict):
+        idfpix = pix_data.get("idfpix")
         self.__idfpix = idfpix
 
     def __get_idfpix(self):
@@ -36,10 +40,17 @@ class WSPixGera:
     def get_payload(self):
         return self.__payload
 
-    def gerar_pix(self):
+    def request_gerar_pix(self):
         payload = self.get_payload()
         headers = self.__get_headers()
         url = self.__get_url()
-        resp = requests.post(url=url, json=payload, headers=headers)
-        self.__set_idfpix(resp.json().get("idfpix"))
-        return resp.json()
+        resp = requests.post(headers=headers, url=url, json=payload)
+        return resp
+    
+    def gerar_pix(self):
+        try:
+            resp = self.request_gerar_pix()
+            self.__set_idfpix(resp.json())
+            return resp
+        except Exception as error:
+            return error

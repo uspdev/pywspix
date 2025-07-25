@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Literal
+from typing import Literal, Optional
 from validate_docbr import CPF, CNPJ
 from pydantic import (
     BaseModel,
@@ -12,13 +12,13 @@ from pydantic import (
 
 class GerarPix(BaseModel):
     tipoPessoa: Literal["PF", "PJ"]
-    codPesOrg: int
-    docPesOrg: int
-    nomePesOrg: str
+    codPesOrg: Optional[int] = None
+    docPesOrg: Optional[int] = None
+    nomePesOrg: Optional[str] = None
     valor: float
-    infoCobranca: str
-    emailPesOrg: EmailStr
-    expiracao: int
+    infoCobranca: Optional[str] = None
+    emailPesOrg: Optional[EmailStr] = None
+    expiracao: Optional[int] = None
     codigoFonteRecurso: int
     codigoUnidadeDespesa: int
     estruturaHierarquica: str

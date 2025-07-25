@@ -43,7 +43,7 @@ def test_get_url():
     lista = create_lista()
     url = lista.get_url()
     print(url)
-    assert url == "https://test.pix.api/pix/listarConcluidos"
+    assert url == "https://test.pix.api/wspix/pix/listarConcluidos"
 
 
 def test_format_date():

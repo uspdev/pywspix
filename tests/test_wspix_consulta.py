@@ -10,7 +10,7 @@ def get_consultar_obj():
 
 def test_get_consulta_url():
     consulta = get_consultar_obj()
-    assert consulta.get_consulta_url("idfpix") == "https://api.test/idfpix"
+    assert consulta.get_consulta_url("idfpix") == "https://api.test/wspix/api/pix/idfpix"
 
 
 def test_get_verificar_parameters():
