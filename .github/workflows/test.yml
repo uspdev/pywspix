@@ -25,6 +25,9 @@ jobs:
 
     - name: 📦 Install Poetry
       uses: abatilo/actions-poetry@v3
+      with:
+        poetry-version: 1.7.1
+
 
     - name: 🧰 Install dependencies
       run: poetry install
