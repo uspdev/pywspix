@@ -5,7 +5,7 @@ from pywspix.headers import Headers
 from pywspix.schemas import SearchParams
 
 
-class Lista:
+class WSPixLista:
     """
     Cliente para listar cobranças Pix concluídas via WebService institucional.
 

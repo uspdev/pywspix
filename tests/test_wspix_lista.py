@@ -1,7 +1,7 @@
 import pytest
 from pydantic import ValidationError
 from datetime import datetime
-from pywspix.lista import Lista
+from pywspix.lista import WSPixLista
 from pywspix.headers import Headers
 
 
@@ -18,7 +18,7 @@ URL = "https://test.pix.api"
 
 def create_lista():
     headers = Headers(user="user1", password="pass")
-    lista = Lista(baseurl=URL, headers=headers)
+    lista = WSPixLista(baseurl=URL, headers=headers)
     lista.set_search_params(**params)
     return lista
 
