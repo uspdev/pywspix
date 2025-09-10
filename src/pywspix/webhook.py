@@ -99,7 +99,7 @@ class WSPixWebhook:
             config = self.get_config()
             headers = self.get_headers()
             resp = requests.post(url=url, json=config, headers=headers)
-            return resp.json()
+            return resp
         except Exception as error:
             return error
 
@@ -114,6 +114,6 @@ class WSPixWebhook:
             url = self.get_url()
             headers = self.get_headers()
             resp = requests.delete(url=url, headers=headers)
-            return resp.json()
+            return resp
         except Exception as error:
             return error

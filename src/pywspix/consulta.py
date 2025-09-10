@@ -69,6 +69,6 @@ class WSPixConsulta:
             headers = self.get_headers()
             parameters = self.get_verifica_parameters()
             resp = requests.get(url=url, headers=headers, params=parameters)
-            return resp.json()
+            return resp
         except Exception as error:
             return error
